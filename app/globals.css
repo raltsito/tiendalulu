@@ -1,0 +1,136 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
+}
+
+:root {
+  --bg-from: #fff5f8;
+  --bg-to: #fde0ea;
+  --card: #ffffff;
+  --accent: #e0628a;
+  --accent-dark: #c2547a;
+  --accent-light: #f9c6d8;
+  --text: #1e1218;
+  --text-mid: #7a5060;
+  --text-soft: #b08898;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background: linear-gradient(160deg, var(--bg-from) 0%, var(--bg-to) 100%);
+  background-attachment: fixed;
+  color: var(--text);
+  font-family: var(--font-sans), sans-serif;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100dvh;
+}
+
+/* Textura de ruido sutil */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.028;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Orbe decorativo de fondo */
+body::after {
+  content: '';
+  position: fixed;
+  top: -120px;
+  right: -80px;
+  width: 360px;
+  height: 360px;
+  background: radial-gradient(circle, #f9a8c4 0%, transparent 70%);
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: 0;
+  border-radius: 50%;
+}
+
+/* Animacion de entrada de tarjetas */
+@keyframes cardUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.card-appear {
+  opacity: 0;
+  animation: cardUp 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Animacion del header */
+@keyframes headerReveal {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header-reveal {
+  animation: headerReveal 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Animacion del boton carrito */
+@keyframes cartPop {
+  0% { transform: scale(0.8); opacity: 0; }
+  70% { transform: scale(1.05); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.cart-pop {
+  animation: cartPop 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Pulse suave para el boton + */
+@keyframes plusPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(224, 98, 138, 0.4); }
+  50% { box-shadow: 0 0 0 6px rgba(224, 98, 138, 0); }
+}
+
+input,
+textarea,
+select {
+  font-family: var(--font-sans), sans-serif;
+}
+
+/* Separador decorativo */
+.divider-dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: center;
+}
+
+.divider-dots span {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent-light);
+  display: block;
+}
+
+.divider-dots span:nth-child(2) {
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  opacity: 0.6;
+}
